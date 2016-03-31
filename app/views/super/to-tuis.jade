@@ -1,0 +1,83 @@
+include include/csrf
+
+style.
+  .tui {
+    padding: 10px 0;
+  }
+  .main-tui, .sub-tui {
+    padding: 10px;
+    border-bottom: 1px solid #ffffff;
+  }
+  .user-hide {
+    display: none;
+  }
+  .sub-tui:hover .user-hide {
+    display: block;
+  }
+  .user-names {
+    line-height: 30px;
+  }
+  .user-name {
+    float: left;
+    padding-right: 10px;
+    line-height: 30px;
+  }
+
+.panel
+  .panel-body
+    a.btn.btn-primary.btn-block(ng-href='#/toAddTui') 创建主渠道
+    .tui(ng-repeat='tui in wrapData.tuis', ng-init="$parentIndex = $index")
+      .bg-danger.main-tui
+        .row
+          .col-md-9 主渠道：{{tui.name}}
+          .col-md-3.text-right
+            a(ng-href='#/toAddTui/{{tui._id}}')
+              span 增加子渠道
+            | &nbsp;&nbsp;
+            a(ng-href='#/toUpdateTui/{{tui._id}}')
+              span 编辑
+      .bg-info.sub-tui(ng-if='tui.children.length', ng-repeat='subTui in tui.children')
+        .row
+          .col-md-9
+            .dish-name 子渠道：{{subTui.name}} &nbsp;&nbsp;
+              a(ng-href='#/toUpdateTui/{{subTui._id}}')
+                span 编辑
+          .col-md-3.text-right
+            a.btn.btn-primary(ng-href='javascript:{}', ng-click='countPrice($parentIndex, $index)',
+              ng-show='subTui.leftCount > 0') {{subTui.leftCount}} 个待结算
+            a.btn.btn-primary(disabled, ng-href='javascript:{}',
+              ng-show='subTui.leftCount <= 0') {{subTui.leftCount}} 个待结算
+        .row.tui
+          .col-md-12
+            p
+              b 总计用户数：
+              span.text-danger  {{subTui.dayAll}}
+              | &nbsp;&nbsp;
+              small.text-primary 活跃度: {{subTui.activePer}}%
+              | &nbsp;&nbsp;
+              small.text-primary 取消关注数: {{subTui.dayAllDel}}
+              | &nbsp;&nbsp;
+              small.text-primary 取关率: {{subTui.cancelPer}}%
+            p
+              b 最近一天用户数：
+              span.text-danger {{subTui.day1}}
+              | &nbsp;&nbsp;
+              b 最近七天用户数：
+              span.text-danger  {{subTui.day7}}
+            p
+              b 最近三十天用户数：
+              span.text-danger  {{subTui.day30}}
+              | &nbsp;&nbsp;
+              small.text-primary 取消关注数: {{subTui.day30Del}}
+              | &nbsp;&nbsp;
+              small.text-primary 取关率: {{subTui.cancel30Per}}%
+        .user-hide
+          .row
+            .col-md-4
+              img(ng-if='subTui.qrcode_ticket != ""',
+              ng-src='https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={{subTui.qrcode_ticket}}', width='200')
+            .col-md-8
+              p(ng-show='subTui.users.length > 0')
+                b 用户列表:
+                .user-names.clearfix
+                  .user-name(ng-repeat='user in subTui.users') {{user.wx_name}}

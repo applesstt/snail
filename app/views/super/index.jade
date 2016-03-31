@@ -1,0 +1,90 @@
+extends ../layout/layout-super
+
+append css_content
+  link(rel='stylesheet', href='/lib/angular-bootstrap-datetimepicker/src/css/datetimepicker.css')
+  link(rel='stylesheet', href='/css/admin.css')
+  link(rel='stylesheet', href='/css/dish.css')
+
+block content-main
+  .container-fluid
+    .row
+      .col-md-3
+        ul.nav.nav-tabs.nav-stacked.nav-super
+          //li: a(href='#/', ng-class='{active: navDataSel}')
+            i.glyphicon.glyphicon-stats
+            | 数据统计
+          //li: a(href='#/toRestaurants', ng-class='{active: navRestaurantSel}')
+            i.glyphicon.glyphicon-cutlery
+            | 餐厅管理
+          if roleAry[0]
+            li: a(href='#/toRobotLogs', ng-class='{active: navRobotLogSel}')
+              i.glyphicon.glyphicon-book
+              | 微信机器人日志
+          if roleAry[1]
+            li: a(href='#/toDishs', ng-class='{active: navDishSel}')
+              i.fa.fa-beer
+              | 菜品管理
+          if roleAry[2]
+            li: a(href='#/toQuestions', ng-class='{active: navQuestionSel}')
+              i.fa.fa-question
+              | 问题管理
+          if roleAry[3]
+            li: a(href='#/toPapers', ng-class='{active: navPaperSel}')
+              i.fa.fa-file
+              | 文章管理
+          if roleAry[4]
+            li: a(href='#/toTuis', ng-class='{active: navTuiSel}')
+              i.fa.fa-dollar
+              | 渠道推广
+          if roleAry[5]
+            li: a(href='#/toOrders', ng-class='{active: navOrderSel}')
+              i.glyphicon.glyphicon-earphone
+              | 餐厅预定管理
+          if roleAry[6]
+            li: a(href='#/toJapanRestaurants', ng-class='{active: navJapanRestaurantSel}')
+              i.glyphicon.glyphicon-star
+              | 米其林餐厅数据
+          if isSuperAdmin
+            li: a(href='#/toFetchs', ng-class='{active: navFetchSel}')
+              i.glyphicon.glyphicon-hdd
+              | 抓取餐厅数据
+            li: a(href='#/toUsers', ng-class='{active: navUserSel}')
+              i.glyphicon.glyphicon-user
+              | 会员管理
+            li: a(href='#/toAdmins', ng-class='{active: navAdminSel}')
+              i.glyphicon.glyphicon-star
+              | 管理员管理
+            li: a(href='#/toTools', ng-class='{active: navToolSel}')
+              i.glyphicon.glyphicon-wrench
+              | 常用工具
+            //li: a(href='#/toCheckVoice', ng-class='{active: navVoiceSel}')
+              i.glyphicon.glyphicon-headphones
+              | 语音审核
+            //li: a(href='#/toFoods', ng-class='{active: navFoodSel}')
+              i.fa.fa-beer
+              | 应季菜品管理
+            //li: a(href='#/toSeasons', ng-class='{active: navSeasonSel}')
+              i.glyphicon.glyphicon-heart
+              | 应季美食推荐
+            //li: a(href='#/toCoupons', ng-class='{active: navCouponSel}')
+              i.glyphicon.glyphicon-gift
+              | 优惠券
+      .col-md-9
+          .super-content(ng-view)
+
+append js_content
+  script(src='/lib/angular/angular.min.js')
+  script(src='/lib/angular-route/angular-route.min.js')
+  script(src='/lib/angular-resource/angular-resource.min.js')
+  script(src='/lib/ng-file-upload/ng-file-upload-shim.min.js')
+  script(src='/lib/ng-file-upload/ng-file-upload.min.js')
+  script(src='/lib/angular-bootstrap/ui-bootstrap-tpls.min.js')
+  script(src='/lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.js')
+  //script(src='/lib/highcharts/highcharts.js')
+  script(src='/js/role_config.js')
+  script(src='/js/super/services.js')
+  script(src='/js/super/base-controllers.js')
+  //script(src='/js/super/data-controllers.js')
+  script(src='/js/super/controllers.js')
+  script(src='/js/super/app.js')
+  //script(src='/js/super/data.js')

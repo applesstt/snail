@@ -1,0 +1,20 @@
+include include/csrf
+p.form-inline.clearfix
+  select.form-control.pull-left(ng-model='joinType', ng-change='changeJoinType()')
+    option(value='') 加入方式
+    option(value='1') 来自店铺
+    option(value='2') 主动关注
+  select.form-control.pull-right(ng-options='restaurant.name for restaurant in wrapRestaurants.restaurants', ng-model='wrapRestaurants.selRestaurant', ng-change='changeRestaurant()')
+    option(value='') 筛选餐厅会员
+ul.nav.nav-tabs
+  - var tabs = [['all', '全部'], [3, '达人'], [2, '资深'], [1, '普通']]
+  - each tab in tabs
+    li(ng-class='{ "active": "#{tab[0]}"==selTabIndex }', role='presentation')
+      a(ng-click='selTab("#{tab[0]}")', href='javascript:{}') #{tab[1]}
+p:.table-responsive
+  table.table.table-striped
+    tbody
+      tr(ng-repeat='user in wrapData.users')
+        td.col-md-10
+          include include/user-wx-detail
+include include/pagination

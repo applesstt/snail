@@ -1,0 +1,53 @@
+include include/csrf
+style.
+  .question_img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+  .sys-question {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 10px;
+    line-height: 12px;
+    padding-left: 2px;
+    padding-right: 2px;
+    background-color: #f7951b;
+    text-align: center;
+  }
+p.clearfix
+  .row
+    .col-md-6
+      input.form-control(type='text', ng-model='question_search')
+    .col-md-2
+      button.btn.btn-primary(ng-click='filterQuestion()') 搜索
+    .col-md-4
+      a.btn.btn-primary.pull-right(ng-click='open()') 新建问题
+ul.nav.nav-tabs
+  li(ng-repeat='cate in questionCates', ng-class="{true: 'active', false: ''}[cate.key == selQuestionCate]")
+    a(ng-href='javascript:{}', ng-click='changeCate($index)') {{cate.name}}
+.table-responsive
+  table.table.table-striped
+    thead
+      tr
+        th 问题匹配
+        th 答案
+        th.text-center 图片
+        th
+    tbody
+      tr(ng-repeat='question in wrapData.questions')
+        td.col-md-3(style='position: relative;')
+          .sys-question(ng-if='question.category === 1') sys
+          div {{question.question}}
+          div(ng-repeat='subQuestion in question.sub_questions') {{subQuestion}}
+        td.col-md-4
+          div {{question.text}}
+          div(ng-repeat='link in question.links')
+            a(ng-href='{{link.url}}', target='_blank') {{link.name}}
+        td.text-center.col-md-3
+          img.question_img(ng-if='question.img', ng-src='{{question.img}}')
+        td.text-center.col-md-2
+          button.btn-block.btn.btn-primary.btn-sm(ng-click='edit($index)') 编辑
+          button.btn-block.btn.btn-primary.btn-sm(ng-show='isOpen', ng-click='sel($index)') 仅选中
+          button.btn-block.btn.btn-primary.btn-sm(ng-show='isOpen', ng-click='sel($index, true)') 选中并发送用户
+include include/pagination

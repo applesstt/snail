@@ -1,0 +1,78 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title 日料栈
+    link(rel='stylesheet', href='/lib/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', media='screen', href='http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/bootstrap-desk.css')
+    link(rel='stylesheet', href='/css/admin.css')
+    //[if lt IE 9]>
+      <script src='http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js'></script>
+      <script src='http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js'></script><![endif]
+    //put other css files in css_content
+    block css_content
+    script(src='//cdn.bootcss.com/modernizr/2.8.3/modernizr.min.js')
+  body
+    header.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand.hidden-sm(href='/') 日料
+            span 栈
+        nav.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right.hidden-em
+            if req.isAuthenticated()
+              if req.user.isSuperAdmin || req.user.isAdmin
+                - var adminUrl = '/super'
+                li
+                  a(href=adminUrl) 后台管理
+                //li
+                  a(href='/robot') 智能机器人
+              //li
+                a.tooltip-link(href='/users/#{req.user.email}/edit', data-toggle='tooltip', data-placement='bottom', title='设置')
+                  .glyphicon.glyphicon-cog
+              li
+                a.tooltip-link(href='/logout', data-toggle='tooltip', data-placement='bottom', title='退出')
+                  .glyphicon.glyphicon-log-out
+            else
+              li
+                a(href='/login', data-toggle='tooltip',data-placement='bottom')
+                  .glyphicon.glyphicon-log-out
+                  |  登录
+              //li
+                a(href='/signup') 注册
+
+    #main.container(class=isHome?'home':'')
+      - if(typeof message !== 'undefined' && message.length > 0)
+        .alert.alert-dismissable.alert-danger
+          button.close(data-dismiss='alert', aria-hidden='true') ×
+          | #{message}
+      block content
+
+    footer
+      aside.footer-about
+        .container
+          .row
+            .col-md-4
+              h3
+                .glyphicon.glyphicon-headphones
+                |  关于我们
+              .footer-text 微信号：RyoriStack [日料栈]
+              .footer-email zemiao.li@robaiter.com
+      aside.footer-inspired
+        .container
+          .glyphicon.glyphicon-heart
+          |  Inspired by
+          span.footer-power 巡山科技
+    script(src='http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js')
+    script(src='http://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js')
+    script(src='/lib/moment/moment.js')
+    script(src='/js/common.js')
+    block js_content

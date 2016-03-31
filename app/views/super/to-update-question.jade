@@ -1,0 +1,52 @@
+include include/csrf
+style.
+  .question-links {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+.modal-header
+  h3.modal-title 新建问题
+  .modal-body
+    form.super-form(name='questionForm')
+      .form-group
+        label(ng-repeat='cate in questionCates', ng-if='cate.key !== "all"')
+          input(type='radio', name='category', ng-model='question.category', value='{{cate.key}}')
+          | &nbsp;{{cate.name}}&nbsp;&nbsp;
+      .form-group
+        label
+          span.text-danger &nbsp;*&nbsp;
+          | 问题分词
+        input.form-control(type='text', ng-model='question.question', required)
+      div(ng-show='question.sub_questions.length')
+        .form-group(ng-repeat='subQuestion in question.sub_questions track by $index')
+          input.form-control(ng-model='question.sub_questions[$index]')
+      .form-group
+        button.btn.btn-primary.btn-sm(ng-click='addSubQuestion()') + 同类问题分词
+      .form-group
+        label 文字回复
+        textarea.form-control(ng-model='question.text')
+      .form-group.question-links
+        .form-group.row(ng-repeat='link in question.links track by $index')
+          .col-md-5
+            input.form-control(ng-model='link.name', placeholder='标题')
+          .col-md-3
+            input.form-control(ng-model='link.url', placeholder='地址')
+          .col-md-2
+            button.btn.btn-primary(ng-click='selPaper($index)') 选择本地文章
+          .col-md-2
+            button.btn.btn-primary(ng-click='selWxNew($index)') 选择微信文章
+        button.btn.btn-primary.btn-sm(ng-click='addLink()') + 附加链接地址
+      .form-group
+        label 图片回复
+        .dish-image.clearfix
+          img(ng-if='question.img', ng-src='{{question.img}}')
+          .dish-image-action
+            input(type='file', ngf-select, ng-model='question.picFile', name='file', accept='image/*', ngf-max-size='1048576')
+            button.btn.btn-sm.btn-primary(ng-click='uploadPic(question.picFile)') 更新图片
+            | &nbsp;&nbsp;
+            button.btn.btn-sm.btn-warning(ng-click='delPic()') 删除图片
+      .row
+        .col-md-6
+          a.form-control.btn.btn-primary(ng-click='saveOrUpdateQuestion()', ng-disabled='questionForm.$invalid') 点我保存问题
+        .col-md-6
+          a.form-control.btn.btn-warning(ng-click='cancel()') 返回问题列表

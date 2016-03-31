@@ -1,0 +1,86 @@
+include include/csrf
+form.super-form(name='orderForm')
+  .form-group
+    label(for='order-name') 预订人姓名
+      span.text-danger *
+    input#order-name.form-control(name='name', required, ng-model='order.name')
+  .form-group
+    label(for='order-tel') 你在国内的手机号
+      span.text-danger *
+    input#order-tel.form-control(name='tel', required, ng-model='order.tel')
+  .form-group
+    label(for='order-no') 需要预定几个位置？
+      span.text-danger *
+    input#order-no.form-control(name='no', required, ng-model='order.no')
+  .form-group
+    label(for='order-child') 其中有几个小朋友？（12岁以下）
+      span.text-danger *
+    input#order-child.form-control(value=0, name='child', required, ng-model='order.child')
+  .form-group(ng-if='order.is_tui')
+    label 选择你想吃的料理类型和人均消费预算
+      span.text-danger *
+    table.table.table-bordered.text-center
+      thead
+        th
+        th.text-center 500元以下
+        th.text-center 500~1000元
+        th.text-center 1000元以上
+      tbody
+        - var cates = []
+        - cates.push({name: '怀石料理', key: 'hsll'})
+        - cates.push({name: '寿司', key: 'ss'})
+        - cates.push({name: '天妇罗', key: 'tfl'})
+        - cates.push({name: '和牛料理', key: 'hnll'})
+        - cates.push({name: '河豚料理', key: 'htll'})
+        - cates.push({name: '其他', key: 'qt'})
+        - each cate in cates
+          tr
+            td #{cate.name}
+            td: input.cate(type='checkbox', disabled, ng-checked='order.#{cate.key}=="0"', readonly='readonly', class=cate.key, value='0')
+            td: input.cate(type='checkbox', disabled, ng-checked='order.#{cate.key}=="500"', readonly='readonly', class=cate.key, value='500')
+            td: input.cate(type='checkbox', disabled, ng-checked='order.#{cate.key}=="1000"', readonly='readonly', class=cate.key, value='1000')
+
+  .orderGroup(ng-repeat='sub in order.orders')
+    .form-group
+      .h5 餐厅所在城市
+      input.form-control.inline(ng-model='sub.city')
+    .form-group
+      label 餐厅名字
+      input.form-control(name='restaurant', ng-model='sub.restaurant')
+    .form-group
+      label 绑定预定餐厅及待定餐厅
+      .help-block(ng-repeat='restaurant in sub.bind_restaurants')
+        .row
+          .col-md-9
+            select.form-control(ng-model='sub.bind_restaurants[$index]', ng-options='(r.city + " - " + r.name) for r in japanRestaurants track by r._id')
+          .col-md-3
+            button.btn.btn-sm.btn-primary(ng-click='deleteRestaurants(sub, $index)') 删除绑定餐厅
+      button.btn.btn-primary.btn-sm.btn-block(ng-click='addRestaurants(sub)') + 增加绑定餐厅
+    .form-group
+      label 用餐日期
+      input.form-control(ng-model='sub.date')
+    .form-group(ng-if='order.is_tui')
+      label 午餐 or 晚餐
+      .form-inline(ng-if='sub.isLunch')
+        label 午餐：
+        input.form-control(ng-model='sub.lunch')
+      .form-inline(ng-if='sub.isDinner')
+        label 晚餐：
+        input.form-control(ng-model='sub.dinner')
+    .form-group
+      .h5 用户期望的具体时间 or 最终预定的时间(例如：18：00)
+      input.form-control(ng-model='sub.time')
+  .form-group
+    label(for='order-advice') 想多嘱咐我们几句或有改进建议请写在这里后提交！
+    textarea#order-advice.form-control(rows=6, name='advice', ng-model='order.advice')
+  .form-group
+    label(for='order-other') 备注
+    textarea#order-other.form-control(rows=6, name='other', ng-model='order.other')
+  .form-group
+    label(for='order-other-admin') 管理员备注
+    textarea#order-other-admin.form-control(rows=6, name='other_admin', ng-model='order.other_admin')
+  .row
+    .col-md-6
+      a.form-control.btn.btn-danger(ng-click='update()', ng-disabled='orderForm.$invalid') 点我保存预定
+    .col-md-6
+      a.form-control.btn.btn-warning(ng-href='#/toOrders') 返回预定列表
