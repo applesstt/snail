@@ -29,6 +29,9 @@ html
             | 蜗牛爬爬
         nav.collapse.navbar-collapse
           ul.nav.navbar-nav.navbar-right.hidden-em
+            li
+              a(href='/camps') 营地
+
             if req.isAuthenticated()
               if req.user.isSuperAdmin || req.user.isAdmin
                 - var adminUrl = '/super'

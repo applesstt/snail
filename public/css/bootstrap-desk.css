@@ -20,16 +20,17 @@ a:hover {
   color: #ffffff;
 }
 
-.navbar-inverse .navbar-brand {
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
   color: #6d6d6d;
   font-size: 30px;
 }
 
-.navbar-inverse .navbar-nav>li>a {
+.navbar-inverse .navbar-nav>li>a,
+.navbar-inverse .navbar-nav>li>a:hover,
+.navbar-inverse .navbar-nav>li>a:focus {
   color: #6d6d6d;
-}
-.navbar-nav>li {
-  border-left: 1px solid #333344;
 }
 .navbar-brand, .navbar-nav>li>a {
   padding: 0 15px;
@@ -356,17 +357,10 @@ a.home-img-sub-title:hover {
   margin-top: 40px;
   margin-bottom: 40px;
 }
-.videos-row {
-  margin-top: 20px;
-}
 .video-wrap {
   position: relative;
   overflow: hidden;
   height: 270px;
-}
-.videos-title {
-  display: block;
-  text-align: right;
 }
 .video-img {
   min-width: 100%;
