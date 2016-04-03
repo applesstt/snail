@@ -4,7 +4,7 @@ html
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    title 日料栈
+    title 蜗牛爬爬
     link(rel='stylesheet', href='/lib/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet', media='screen', href='http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.css')
     link(rel='stylesheet', href='/css/bootstrap-desk.css')
@@ -24,8 +24,9 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand.hidden-sm(href='/') 日料
-            span 栈
+          a.navbar-brand.hidden-sm(href='/')
+            i
+            | 蜗牛爬爬
         nav.collapse.navbar-collapse
           ul.nav.navbar-nav.navbar-right.hidden-em
             if req.isAuthenticated()
@@ -64,13 +65,13 @@ html
               h3
                 .glyphicon.glyphicon-headphones
                 |  关于我们
-              .footer-text 微信号：RyoriStack [日料栈]
-              .footer-email zemiao.li@robaiter.com
-      aside.footer-inspired
-        .container
-          .glyphicon.glyphicon-heart
-          |  Inspired by
-          span.footer-power 巡山科技
+              .footer-text 微信号：SnailPa [蜗牛爬爬]
+              .footer-email applesstt@gmail.com
+              .footer-text
+                .glyphicon.glyphicon-heart
+                  |  Inspired by
+                  span.footer-power 北京见维思萌科技有限公司
+
     script(src='http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js')
     script(src='http://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js')
     script(src='/lib/moment/moment.js')

@@ -6,13 +6,7 @@ Makefile
 npm-debug.log
 public/lib/
 public/avatar/
-public/upload/images/
-public/upload/voice/
-public/upload/mp3/
-public/upload/pic/
-public/upload/food/
-public/upload/dish/
-public/upload/japanRestaurant/
+public/upload/camp/
 config/aimls/question.aiml
 config/dicts/dish.txt
 config/dicts/dish_error_name.txt

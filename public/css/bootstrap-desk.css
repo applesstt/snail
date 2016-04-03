@@ -8,34 +8,43 @@ a:hover {
   color: #bbbbbb;
 }
 .navbar {
-  border-bottom: 1px solid #262932;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
   margin-bottom: 0;
-  box-shadow: 0px 0 3px rgba(0,0,0,0.5);
-  background: #3e444e;
-  background: -webkit-linear-gradient(top,#454B56,#393F48);
-  background: -moz-linear-gradient(top,#454B56,#393F48);
-  background: -o-linear-gradient(top,#454B56,#393F48);
-  background-image: -ms-linear-gradient(#454B56,#393F48);
+  border-bottom: 1px solid transparent;
+  background: #ffffff;
+  transition: background 0.3s ease-out;
+  min-height: 50px;
+}
+
+.header-scroll.navbar-inverse .navbar-brand {
+  color: #ffffff;
 }
 
 .navbar-inverse .navbar-brand {
-  color: #fff;
-  font-size: 20px;
+  color: #6d6d6d;
+  font-size: 30px;
 }
 
 .navbar-inverse .navbar-nav>li>a {
-  color: #ccc;
+  color: #6d6d6d;
 }
 .navbar-nav>li {
   border-left: 1px solid #333344;
 }
-.navbar {
-  min-height: 40px;
-}
 .navbar-brand, .navbar-nav>li>a {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  height: 40px;
+  padding: 0 15px;
+  height: 80px;
+  line-height: 80px;
+}
+.navbar-brand i {
+  background: url(../img/logo.png) no-repeat 50% 50%;
+  width: 60px;
+  height: 60px;
+  display: block;
+  float: left;
+  border-radius: 30px;
+  margin-top: 10px;
+  margin-right: 20px;
 }
 .navbar-brand {
   padding-right: 47px;
@@ -109,11 +118,12 @@ a:hover {
   display: inline-block;
 }
 .footer-about {
-  background: #242b32 url(../img/header_icons.png) repeat-x 0 50%;
+  background-color: #1f2c37;
   color: #b3b5b7;
   font-size: 14px;
   padding-top: 30px;
   padding-bottom: 50px;
+  border-top: 10px solid #f28c83;
 }
 .footer-about h3 {
   color: #fff;
@@ -162,7 +172,7 @@ html, body {
   height: 502px;
 }
 .home-img-cover {
-  background-color: #000000;
+  background-color: #6d6d6d;
   opacity: 0.3;
   position: absolute;
   top: 0;
@@ -179,10 +189,25 @@ html, body {
   color: #eeeeee;
   text-align: center;
 }
+.home-img-pre-title {
+  font-size: 30px;
+  padding-top: 180px;
+}
 .home-img-title {
-  font-size: 50px;
-  padding-top: 150px;
-  padding-bottom: 50px;
+  font-size: 60px;
+  font-family: bold;
+  padding-top: 10px;
+  color: #fff;
+}
+a.home-img-sub-title {
+  font-size: 30px;
+  padding-top: 10px;
+  color: #fff;
+  display: block;
+  outline: none;
+}
+a.home-img-sub-title:hover {
+  color: #f28c83;
 }
 .home-try-it {
   font-weight: bold;
@@ -228,18 +253,34 @@ html, body {
   line-height: 180px;
   text-align: center;
 }
+.logo-color-green {
+  background-color: #94b758;
+  border: 2px solid #94b758;
+}
+
+.logo-color-red {
+  background-color: #c75c5c;
+  border: 2px solid #c75c5c;
+}
+.logo-color-yellow {
+  background-color: #f3c536;
+  border: 2px solid #f3c536;
+}
 .logo-color-green, .logo-color-red, .logo-color-yellow {
-  /*background-color: #4f5d73;*/
-  background-color: #2b2d35;
+  padding: 3px;
+  background: none;
+}
+.logo-color-green i, .logo-color-red i, .logo-color-yellow i {
+  color: #fff;
 }
 .logo-color-green i {
-  color: #94b758;
+  background-color: #94b758;
 }
 .logo-color-red i {
-  color: #c75c5c;
+  background-color: #c75c5c;
 }
 .logo-color-yellow i {
-  color: #f3c536;
+  background-color: #f3c536;
 }
 .home-info-text {
   padding-top: 20px;
@@ -302,6 +343,74 @@ html, body {
 }
 #home-feedback .carousel-indicators li {
   margin-left: 5px;
+  margin-right: 5px;
+}
+
+.videos-wrap {
+  position: relative;
+  background-color: #f5f5f5;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.videos-row {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.videos-row {
+  margin-top: 20px;
+}
+.video-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 270px;
+}
+.videos-title {
+  display: block;
+  text-align: right;
+}
+.video-img {
+  min-width: 100%;
+  height: 270px;
+  display: block;
+}
+.video-img-transform {
+  -webkit-transition: all 5s;
+  -moz-transition: all 5s;
+  transition: all 5s;
+}
+.video-wrap:hover .video-img {
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+}
+.video-info {
+  height: 40px;
+  line-height: 40px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.9;
+  color: #fff;
+  width: 100%;
+}
+.video-info .video-author img {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.video-author, .video-restaurant {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.video-author {
+  text-align: right;
+}
+.video-restaurant i {
   margin-right: 5px;
 }
 

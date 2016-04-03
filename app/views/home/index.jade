@@ -1,36 +1,68 @@
 extends ../layout/layout
 
 append css_content
-  link(rel='stylesheet', href='/css/home.css')
+  style.
+    html, body {
+      background-color: #222;
+    }
+
+    .home-img {
+      background-image: none;
+    }
+    .home-img-wrap {
+      height: 100%;
+    }
+    .header-scroll {
+      background: transparent;
+      border-bottom-color: transparent;
+      box-shadow: none;
+    }
+    .header-scroll.navbar-inverse .navbar-nav>li>a {
+      color: #ffffff;
+    }
+    .header-scroll .navbar-nav>li {
+      border-left-color: transparent;
+    }
+    .info-wrap, .data-wrap {
+      background: #fff;
+    }
+    .info-wrap, .data-wrap, footer {
+      position: relative;
+    }
+    .home-info-logo {
+      width: 160px;
+      height: 160px;
+    }
+    .home-info-logo i {
+      font-size: 80px;
+      line-height: 150px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      display: block;
+      top: 0;
+      -webkit-transition: all .7s ease-out;
+      -moz-transition: all .7s ease-out;
+      transition: all .7s ease-out;
+    }
+    .home-info-logo:hover i {
+      -ms-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+    }
+    .home-datas {
+      padding-top: 100px;
+      padding-bottom: 40px;
+    }
+
 block content
   .home-img-wrap
     .home-img-cover
     .home-img-content
-      .container
-        .row
-          .col-md-6
-            .home-img-phone
-              .home-phone-show-wrap
-                .home-phone-show
-                  .clearfix.wx-box.wx-user
-                    .wx-img
-                    .wx-msg Hi
-                  .clearfix.wx-box.wx-robot
-                    .wx-img
-                    .wx-msg 你好呀~ 有什么可以帮到你？
-              form#robot-test-form
-                input.form-control#robot-test-question(type='text', placeholder='请输入你的问题，回车键发送')
-          .col-md-6
-            .clearfix
-              .home-test-robot(href='javascript:{}') 点我试试
-            h1.home-title 专业的私人美食助手 未来的餐饮服务入口
-            .home-sub-title
-              p “听说日本的怀石料理很有名，我想了解下。”
-              p “我想吃天妇罗，哪家店做的好呢？”
-              p.home-send-info.text-danger
-                span 发条信息
-                |  全部搞定
-            button.btn.btn-lg.btn-primary.btn-try(data-toggle='modal', data-target='.bs-qrcode-modal') 立即体验
+      .home-img-pre-title 蜗牛爬爬
+      .home-img-title 只为在路上的你...
+      a.home-img-sub-title(href='javascript:{}' data-toggle='modal', data-target='.bs-qrcode-modal') 立即体验
   .modal.fade.bs-qrcode-modal(tabindex="-1", role="dialog", aria-labelledby="mySmallModalLabel", aria-hidden="true")
     .modal-dialog.modal-sm
       .modal-content
@@ -41,7 +73,7 @@ block content
             a.anchorjs-link(href="#mySmallModalLabel")
               span.anchorjs-icon
         .modal-body
-          img.home-qrcode(src='/img/home/qrcode.jpg')
+          img.home-qrcode(src='/img/qrcode.jpg')
   .info-wrap
     .container
       .home-info
@@ -50,97 +82,36 @@ block content
             .home-info-col
               .home-info-logo.logo-color-green
                 i.glyphicon.glyphicon-stats
-              .home-info-text 我们已拥有数千条日料小知识，了解全国近万家日料餐厅。
-          .col-md-4
-            .home-info-col
-              .home-info-logo.logo-color-yellow
-                i.glyphicon.glyphicon-tint
-              .home-info-text 高大上的智能机器人栈栈，等你来勾搭。
+              .home-info-text 全国400家精品露营地,关于露营地的最全面的展示
           .col-md-4
             .home-info-col
               .home-info-logo.logo-color-red
-                i.glyphicon.glyphicon-heart
-              .home-info-text 最棒的你，做为日料吃货，怎能错过随身日料小助手。
-  .orders-wrap
-    .container
-      .container-fluid
-        - var orders = []
-        - orders.push({name: '数寄屋桥次郎', level: 3, id: '56758042becadb83378954dd', img: 'erlang.png'})
-        - orders.push({name: '菊乃井', level: 2, id: '5675833e511c680a3a034f2b', img: 'junaijing.png'})
-        - orders.push({name: '龙吟', level: 3, id: '56758071becadb83378954de', img: 'longyin.png'})
-        - each order in orders
+                i.glyphicon.glyphicon-thumbs-up
+              .home-info-text 300名达人在这里帮你解决关于房车、露营等专业问题
           .col-md-4
-            .order-wrap
-              img(src='/img/michelin/#{order.img}')
-              .order-info
-                .order-info-bg
-                .order-info-inner
-                  .order-name #{order.name}
-                  .order-star
-                    - var n = 0
-                    while n < order.level
-                      - n++
-                        span.glyphicon.glyphicon-star
-                  a.btn.btn-danger.order-btn(href='/michelin/#{order.id}', target='_blank') 在线预定
-      .col-md-6.col-md-offset-3.order-list-btn
-        a(href='/michelins', target='_blank') 更多日本米其林餐厅
-  .news-wrap
+            .home-info-col
+              .home-info-logo.logo-color-yellow
+                i.glyphicon.glyphicon-user
+              .home-info-text 超过20000名爱好者等你来约
+  .videos-wrap
     .container
-      .container-fluid
-        - var news = [];
-        - news.push({title: '是山居 | 一个双子座老爷爷和他的天妇罗', date: '10月04日', des: '这一次，碗丸同学溜达到东京，拜访了“天妇罗之神”早乙女哲哉的“是山居”。', img: 'n1.jpeg', url: 'http://mp.weixin.qq.com/s?__biz=MzAwNzQwNzY4MQ==&mid=210224043&idx=1&sn=dfe5a7f0e8a38ba5393af1dad63d3769#rd'})
-        - news.push({title: '让人安心的酱油味（一）日本酱油的种类与分布', date: '09月16日', des: '五郎大叔说，不矫揉造作的酱油味，让人安心~', img: 'n2.jpeg', url: 'http://mp.weixin.qq.com/s?__biz=MzAwNzQwNzY4MQ==&mid=209787758&idx=1&sn=d48a973abc5677fd6e849f63bad8df2d#rd'})
-        - news.push({title: '寿喜烧君二三事', date: '09月10日', des: '这一次，十三点同学逛到了大阪，造访了位于东心斋桥的一间寿喜烧百年老店。', img: 'n3.jpeg', url: 'http://mp.weixin.qq.com/s?__biz=MzAwNzQwNzY4MQ==&mid=209562918&idx=1&sn=c135fc3eb23b496778f30fe5b3f7535e#rd'})
-        - news.push({title: '被评上米其林星的居酒屋是这个样子的', date: '09月10日', des: '这一次，十三点同学逛到了位于北海道的旭川市，造访了一间有米其林星星的居酒屋。', img: 'n4.jpeg', url: 'http://mp.weixin.qq.com/s?__biz=MzAwNzQwNzY4MQ==&mid=209561023&idx=1&sn=79ac90878e2129455cfd962bfc65b69a#rd'})
-        - news.push({title: '小樽也有寿司之神', date: '09月09日', des: '这一次，十三点同学逛到了位于北海道的小樽，造访了一间创业于二战前的寿司店——幸寿司。', img: 'n5.jpeg', url: 'http://mp.weixin.qq.com/s?__biz=MzAwNzQwNzY4MQ==&mid=209556628&idx=1&sn=6b9f17e131ea69c6a5ec9960fc01f489#rd'})
-        - news.push({title: '味噌是个什么鬼（二）味噌、黄酱、豆豉、甜面酱的找不同游戏', date: '09月02日', des: '欢迎回来继续探讨味噌的话题~经常看到网上有人问味噌、黄酱、 豆豉、甜面酱，etc……有什么区别。', img: 'n6.jpeg', url: 'http://mp.weixin.qq.com/s?__biz=MzAwNzQwNzY4MQ==&mid=209397207&idx=1&sn=2c41004aca30edd2f85cdfeadfb33c8a#rd'})
-        - news.push({title: '昆布', date: '08月31日', des: '昆 布常用来制作高汤的昆布包括真昆布、罗臼昆布、利尻昆布、日高昆布等，他们的特色也各不相同。左起：利尻昆布、', img: 'n7.jpeg', url: 'http://mp.weixin.qq.com/s?__biz=MzAwNzQwNzY4MQ==&mid=209281304&idx=1&sn=a4fd691556a2fcaba4416b2b64a4b67d#rd'})
-        - news.push({title: '出汁——最简单，也最难的料理', date: '08月08日', des: '这次我们来聊一下被日本料理人视为生命的日式高汤——出汁~', img: 'n8.jpeg', url: 'http://mp.weixin.qq.com/s?__biz=MzAwNzQwNzY4MQ==&mid=208755240&idx=1&sn=7edc6a42f831bb0038ba29184a072867#rd'})
-        - news.push({title: '奈良的米其林三星餐厅——和山村', date: '07月17日', des: '小李同学去奈良的米其林三星餐厅和山村吃了一顿怀石料理', img: 'n9.jpeg', url: 'http://mp.weixin.qq.com/s?__biz=MzAwNzQwNzY4MQ==&mid=208306040&idx=1&sn=8d880c689f28a9a84b4ad11dc5633f2e#rd'})
-        - each newInfo in news
-          .col-md-4
-            .new-wrap
-              a.new-title(href=newInfo.url, target='_blank', title=newInfo.title) #{newInfo.title}
-              .new-date #{newInfo.date}
-              .new-img-wrap
-                img.new-img(src='/img/home/#{newInfo.img}')
-              .new-des #{newInfo.des}
-  .home-feedback
-    .container
-      .home-feedback-title 听听日料吃货们怎么说
-      #home-feedback.carousel.slide
-        ol.carousel-indicators
-          li.active(data-target="#home-feedback", data-slide-to="0")
-          li(data-target="#home-feedback", data-slide-to="1")
-          li(data-target="#home-feedback", data-slide-to="2")
-        .carousel-inner
-          .item.active
-            .carousel-caption.clearfix
-              .home-feedback-user.pull-left
-                img(src='http://wx.qlogo.cn/mmopen/ajNVdqHZLLBAgruxQ761LJI8tIN1zugjCrp5eR4iadXGulovmOUCznvJNDCe2Opgl93qwVaxgHdQvxcjn66qkEg/0')
-              .home-feedback-user-text
-                .home-feedback-user-content “在晚饭时间给我看这么好吃的日料，让不让人活了，换衣服，出门吃寿司去！”
-                .home-feedback-user-name @唯唯安
-          .item
-            .carousel-caption.clearfix
-              .home-feedback-user.pull-left
-                img(src='http://wx.qlogo.cn/mmopen/uPlnTpl7nOHgRc7mPXZaPD3Newt8UL2Llw2u39cetJrH5ArE7mcOFibEx4riaiauVmickmJZGGwI3FXzTzawxhXZAQ/0')
-              .home-feedback-user-text
-                .home-feedback-user-content “日料栈终将拯救吃货们的世界”
-                .home-feedback-user-name @曹大俠是減肥計劃破壞
-          .item
-            .carousel-caption.clearfix
-              .home-feedback-user.pull-left
-                img(src='http://wx.qlogo.cn/mmopen/gOsZsficuW87oqjP55WWY3QmdkD1CEdZXQpmDnNWxW11ibW1SWMWWDs1yexjZv75RqQVTRVbWvbjq39LDBtpfFmRzCuibUeTMLz/0')
-              .home-feedback-user-text
-                .home-feedback-user-content “小伙伴们，你们要不要吃的这么欢乐~”
-                .home-feedback-user-name @YOKO胡
-        a.left.carousel-control(href='#home-feedback', role="button", data-slide="prev")
-          span.glyphicon.glyphicon-chevron-left(aria-hidden="true")
-          span.sr-only Previous
-        a.right.carousel-control(href='#home-feedback', role="button", data-slide="next")
-          span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
-          span.sr-only Next
+      a.videos-title(href='javascript:{}') 全部营地
+      - each showCamp in showCamps
+        .row.videos-row
+          - each camp in showCamp
+            .col-md-4
+              .video-wrap
+                img.video-img(src=camp.imgs[0])
+                .video-info
+                  .row
+                    .col-md-6
+                      .video-restaurant
+                        i.glyphicon.glyphicon-home
+                        | #{camp.name}
+                    //.col-md-6
+                      .video-author
+                        img(src=camp.userImg)
+                        | #{camp.userName}
   .data-wrap
     .container
       .home-datas
@@ -150,29 +121,95 @@ block content
               .data-icon-wrap
                 i.glyphicon.glyphicon-user
               .data-content
-                .data-content-val 4470
+                .data-content-val 20189
                 .data-content-info 用户
           .col-md-3
             .panel.data-panel.data-panel-music.clearfix
               .data-icon-wrap
-                i.glyphicon.glyphicon-question-sign
+                i.glyphicon.glyphicon-home
               .data-content
-                .data-content-val 5285
-                .data-content-info 提问
+                .data-content-val 430
+                .data-content-info 露营地
           .col-md-3
             .panel.data-panel.data-panel-headphones.clearfix
               .data-icon-wrap
-                i.glyphicon.glyphicon-cloud
+                i.glyphicon.glyphicon-map-marker
               .data-content
-                .data-content-val 1834
-                .data-content-info 知识
+                .data-content-val 620
+                .data-content-info 活动
           .col-md-3
             .panel.data-panel.data-panel-cutlery.clearfix
               .data-icon-wrap
-                i.glyphicon.glyphicon-cutlery
+                i.glyphicon.glyphicon-book
               .data-content
-                .data-content-val 6260
-                .data-content-info 餐厅
+                .data-content-val 3612
+                .data-content-info 分享
 append js_content
   script(src='/lib/jquery-backstretch/jquery.backstretch.min.js')
-  script(src='/js/home.js')
+  script.
+    $(function() {
+      //var img = '/img/home0' + (Math.floor(Math.random() * 4) + 1) + '.jpg';
+      var img = '/img/home.jpg';
+      $('.home-img-wrap').backstretch(img);
+      $(window).scroll( function() {
+        var st = $(this).scrollTop(),
+          wh = $(window).height(),
+          sf = 1.2 - st/(10*wh);
+
+        $('.backstretch img').css({
+          'transform' : 'scale('+sf+')',
+          '-webkit-transform' : 'scale('+sf+')',
+          'position': 'fixed'
+        });
+
+        $('.home-img-wrap .home-img-content').css({ 'opacity' : (1.4 - st/400) });
+
+        if($(window).scrollTop() > ($(window).height() - 41)){
+          //$('.backstretch').hide();
+          $('header').removeClass('header-scroll');
+        }else{
+          //$('.backstretch').show();
+          $('header').addClass('header-scroll');
+        }
+
+      });
+
+      var st = $(this).scrollTop(),
+        wh = $(window).height(),
+      sf = 1.2 - st/(10*wh);
+
+      $('.backstretch img').css({
+        'transform' : 'scale('+sf+')',
+        '-webkit-transform' : 'scale('+sf+')',
+        'position': 'fixed'
+      });
+
+      $('.home-img-wrap .home-img-content').css({ 'opacity' : (1.4 - st/400) });
+
+      if($(window).scrollTop() > ($(window).height() - 51)){
+        $('.backstretch').hide();
+        $('header').removeClass('header-scroll');
+      }else{
+        $('.backstretch').show();
+        $('header').addClass('header-scroll');
+      }
+
+      $('.home-img-wrap').height($(window).height());
+
+      $('.video-img').on('load', function () {
+        var _baseWidth = $('.video-wrap').width();
+        var _baseHeight = 270;
+        var _imgHeight = $(this).height();
+        var _imgWidth = $(this).width();
+        if (_imgHeight > _baseHeight) {
+          $(this).css('marginTop', (_baseHeight - _imgHeight) / 2);
+        }
+        if (_imgWidth > _baseWidth) {
+          $(this).css('marginLeft', (_baseWidth - _imgWidth) / 2);
+        }
+      })
+
+      setTimeout(function () {
+        $('.video-img').addClass('video-img-transform');
+      }, 1000);
+    });

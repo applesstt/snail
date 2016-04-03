@@ -1,0 +1,38 @@
+extends ../layout/layout
+
+append css_content
+block content
+  .videos-wrap
+    .container
+      - each showCamp in showCamps
+        .row.videos-row
+          - each camp in showCamp
+            .col-md-4
+              .video-wrap
+                img.video-img(src=camp.imgs[0])
+                .video-info
+                  .row
+                    .col-md-6
+                      .video-restaurant
+                        i.glyphicon.glyphicon-home
+                        | #{camp.name}
+append js_content
+  script.
+    $(function() {
+      $('.video-img').on('load', function () {
+        var _baseWidth = $('.video-wrap').width();
+        var _baseHeight = 270;
+        var _imgHeight = $(this).height();
+        var _imgWidth = $(this).width();
+        if (_imgHeight > _baseHeight) {
+          $(this).css('marginTop', (_baseHeight - _imgHeight) / 2);
+        }
+        if (_imgWidth > _baseWidth) {
+          $(this).css('marginLeft', (_baseWidth - _imgWidth) / 2);
+        }
+      })
+
+      setTimeout(function () {
+        $('.video-img').addClass('video-img-transform');
+      }, 1000);
+    });
