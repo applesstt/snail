@@ -20,9 +20,6 @@ append css_content
     .header-scroll.navbar-inverse .navbar-nav>li>a {
       color: #ffffff;
     }
-    .header-scroll .navbar-nav>li {
-      border-left-color: transparent;
-    }
     .info-wrap, .data-wrap {
       background: #fff;
     }
@@ -99,7 +96,7 @@ block content
         .row.videos-row
           - each camp in showCamp
             .col-md-4
-              .video-wrap
+              a.video-wrap(href='/camp/#{camp._id}')
                 img.video-img(src=camp.imgs[0])
                 .video-info
                   .row
@@ -185,7 +182,7 @@ append js_content
 
       $('.home-img-wrap .home-img-content').css({ 'opacity' : (1.4 - st/400) });
 
-      if($(window).scrollTop() > ($(window).height() - 51)){
+      if($(window).scrollTop() > ($(window).height() - 140)){
         $('.backstretch').hide();
         $('header').removeClass('header-scroll');
       }else{

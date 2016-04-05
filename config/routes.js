@@ -107,8 +107,10 @@ module.exports = function (app, passport, wx_api) {
 
   // home route
   app.get('/', home.index);
-  app.get('/camps', home.camps);
   app.get('/index3', home.index3);
+  app.param('campId', home.loadCamp);
+  app.get('/camps', home.camps);
+  app.get('/camp/:campId', home.camp);
 
 
   //app.all('/fetch*', auth.requiresLogin, auth.user.hasSuperAdminAuthorization);

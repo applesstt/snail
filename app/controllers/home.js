@@ -22,6 +22,26 @@ exports.index = function(req, res) {
   })
 }
 
+exports.loadCamp = function(req, res, next, campId) {
+  FetchCamp.load({
+    criteria: {
+      _id: campId
+    }
+  }, function (err, camp) {
+    if (err) return next(err);
+    if (!camp) return next(new Error('camp not found'));
+    req.tempCamp = camp;
+    next();
+  });
+}
+
+exports.camp = function(req, res) {
+  var camp = req.tempCamp;
+  res.render('home/camp', {
+    camp: camp
+  })
+}
+
 exports.camps = function(req, res) {
   FetchCamp.listAll({}, function(err,camps) {
     var showCamps = [];
@@ -35,7 +55,6 @@ exports.camps = function(req, res) {
     });
   })
 }
-
 
 exports.index3 = function(req, res) {
   res.render('home/index3', {

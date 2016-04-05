@@ -12,12 +12,17 @@ a:hover {
   margin-bottom: 0;
   border-bottom: 1px solid transparent;
   background: #ffffff;
-  transition: background 0.3s ease-out;
+  transition: background 0.5s ease-out;
   min-height: 50px;
 }
 
 .header-scroll.navbar-inverse .navbar-brand {
   color: #ffffff;
+}
+
+.header-scroll .container {
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .navbar-inverse .navbar-brand,
@@ -154,7 +159,7 @@ html, body {
 }
 #main {
   min-height: 100px;
-  margin-top: 41px;
+  margin-top: 80px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -350,8 +355,6 @@ a.home-img-sub-title:hover {
 .videos-wrap {
   position: relative;
   background-color: #f5f5f5;
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 .videos-row {
   margin-top: 40px;
@@ -361,6 +364,7 @@ a.home-img-sub-title:hover {
   position: relative;
   overflow: hidden;
   height: 270px;
+  display: block;
 }
 .video-img {
   min-width: 100%;

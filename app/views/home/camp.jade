@@ -1,0 +1,41 @@
+extends ../layout/layout
+
+append css_content
+  style.
+    .camp-img {
+      display: block;
+      margin: 20px;
+      height: 200px;
+      overflow: hidden;
+      float: left;
+    }
+    .camp-img img {
+      min-width: 100%;
+      height: 200px;
+      display: block;
+      overflow: hidden;
+    }
+
+block content
+  p.h2.text-center #{camp.name}
+  div
+    - each tab in camp.tabs
+      dl.dl-horizontal
+        dt #{tab.name}
+        dd #{tab.content}
+    - each desSignle in camp.des
+      dl.dl-horizontal
+        dt
+        dd #{desSignle}
+    
+  .camp-imgs.container-fluid.clearfix
+    .row
+      - each img in camp.imgs
+        .col-sm-4
+          .camp-img
+            img(src=img)
+      - each view in camp.views
+        .col-sm-4
+          .camp-img
+            img(src=view)
+append js_content

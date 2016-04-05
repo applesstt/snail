@@ -8,7 +8,7 @@ block content
         .row.videos-row
           - each camp in showCamp
             .col-md-4
-              .video-wrap
+              a.video-wrap(href='/camp/#{camp._id}')
                 img.video-img(src=camp.imgs[0])
                 .video-info
                   .row
