@@ -272,7 +272,44 @@ var time_gap = 3000;
 var index_page = 1;
 var all_page = 34;
 
+var _removeDupImg = function() {
+  FetchCamp.listAll({}, function(err,camps) {
+    for(var i = 0; i < camps.length; i++) {
+      var camp = camps[i];
+      var tempImgsKey = {};
+      var tempImgs = [];
+      if (camp.imgs) {
+        for (var j = 0; j < camp.imgs.length; j++) {
+          if (!tempImgsKey[camp.imgs[j]]) {
+            tempImgsKey[camp.imgs[j]] = true;
+            tempImgs.push(camp.imgs[j]);
+          }
+        }
+      }
+      camp.imgs = tempImgs;
+
+      var tempViewsKey = {};
+      var tempViews = [];
+      if (camp.views) {
+        for (var j = 0; j < camp.views.length; j++) {
+          if (!tempViewsKey[camp.views[j]]) {
+            tempViewsKey[camp.views[j]] = true;
+            tempViews.push(camp.views[j]);
+          }
+        }
+      }
+      camp.views = tempViews;
+      camp.save(function(err) {
+        console.log('resave camp ' + i + ': ' + camp.name);
+      })
+    }
+  })
+
+}
+
 exports.test = function(req, res) {
+  //_removeDupImg();
+
   //_rewriteImage();
 
   //_load();
