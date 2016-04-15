@@ -63,6 +63,10 @@ exports.index3 = function(req, res) {
   })
 }
 
+exports.jwzm = function(req, res) {
+  res.render('home/jwzm');
+}
+
 var _getCityName = function(cityKey) {
   var citys = map.citys;
   for(var i = 0; i < citys.length; i++) {
