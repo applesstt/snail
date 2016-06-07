@@ -211,6 +211,9 @@ html, body {
   .home-img-title {
     font-size: 42px;
   }
+  .navbar-brand i {
+    margin-right: 5px;
+  }
 }
 a.home-img-sub-title {
   font-size: 30px;
