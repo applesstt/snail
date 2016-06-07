@@ -53,8 +53,10 @@ a:hover {
   margin-right: 20px;
 }
 .navbar-brand {
-  padding-right: 47px;
   position: relative;
+}
+.navbar-collapse.in {
+  background-color: #333333;
 }
 .navbar-brand span {
   background-color: #d9534f;
@@ -204,6 +206,11 @@ html, body {
   font-family: bold;
   padding-top: 10px;
   color: #fff;
+}
+@media screen and (max-width: 992px) {
+  .home-img-title {
+    font-size: 42px;
+  }
 }
 a.home-img-sub-title {
   font-size: 30px;
