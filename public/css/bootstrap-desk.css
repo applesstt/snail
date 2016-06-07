@@ -217,7 +217,7 @@ html, body {
   .home-img-pre-title {
     padding-top: 100px;
   }
-  .header-scroll.navbar-inverse .navbar-brand {
+  .navbar-brand {
     display: block;
     white-space: nowrap;
   }
