@@ -214,6 +214,13 @@ html, body {
   .navbar-brand i {
     margin-right: 5px;
   }
+  .home-img-pre-title {
+    padding-top: 100px;
+  }
+  .header-scroll.navbar-inverse .navbar-brand {
+    display: block;
+    white-space: nowrap;
+  }
 }
 a.home-img-sub-title {
   font-size: 30px;
