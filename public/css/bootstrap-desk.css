@@ -374,14 +374,18 @@ a.home-img-sub-title:hover {
   background-color: #f5f5f5;
 }
 .videos-row {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.videos-row:first-child {
   margin-top: 40px;
-  margin-bottom: 40px;
 }
 .video-wrap {
   position: relative;
   overflow: hidden;
   height: 270px;
   display: block;
+  margin-bottom: 10px;
 }
 .video-img {
   min-width: 100%;
